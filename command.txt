@@ -1,0 +1,30 @@
+# Start Odoo
+sudo systemctl start odoo
+
+# Stop Odoo
+sudo systemctl stop odoo
+
+# Restart Odoo
+sudo systemctl restart odoo
+
+# Check logs
+sudo journalctl -u odoo -f
+
+
+python3 odoo/odoo-bin -c odoo/debian/odoo.conf
+
+nano odoo/debian/odoo.conf
+
+sudo service odoo start
+sudo service odoo stop
+sudo service odoo restart
+sudo service odoo status
+
+
+sudo chown -R ewra:ewra odoo/custom_addons
+
+git clone https://github.com/TACTECS-DT/ewra-erp.git odoo/custom_addons
+
+
+Master Password : 4k7m-5knj-drrg
+
