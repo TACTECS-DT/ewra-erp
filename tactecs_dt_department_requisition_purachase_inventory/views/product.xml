@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+  
+  
+    <record id="ewra_product_req_form_changes"  model="ir.ui.view">
+        <field name="name">ewra.product.req.form.changes</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='type']" position="after">
+             <!-- <field  name="is_custody" />
+             <field  name="custody_state" invisible='not is_custody' required='is_custody'/> -->
+             <!-- <field  name="is_custody" /> -->
+             <field  name="custody_state"/>
+            </xpath> 
+
+        </field>
+    </record>
+</data></odoo>

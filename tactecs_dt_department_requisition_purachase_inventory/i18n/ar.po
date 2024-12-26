@@ -1,0 +1,1194 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* tactecs_dt_department_requisition_purachase_inventory
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0-20241125\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-12-25 06:29+0000\n"
+"PO-Revision-Date: 2024-12-25 08:46+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ar_EG\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5);\n"
+"X-Generator: Poedit 3.5\n"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:res.groups,name:tactecs_dt_department_requisition_purachase_inventory.group_custody_manager
+msgid "  مسؤل العهدة"
+msgstr ""
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__is_custody
+msgid " عهدة ؟"
+msgstr ""
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:res.groups,name:tactecs_dt_department_requisition_purachase_inventory.group_writer_review
+msgid " كاتب الشطب "
+msgstr ""
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:mail.template,body_html:tactecs_dt_department_requisition_purachase_inventory.email_confirm_material_purchase_requistion
+msgid ""
+"<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-"
+"serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"                <p>Dear <!-- ${object.employee_id.parent_id.sudo().name} --"
+"><t t-out=\"object.employee_id.parent_id.sudo().name\"/>,</p><br/>\n"
+"                <p>Please approve the request for material requisition with "
+"reference number <!-- ${object.name} --><t t-out=\"object.name\"/>.</p><br/"
+">\n"
+"                <p>Do not hesitate to contact us if you have any questions.</"
+"p>\n"
+"                <!-- <p>Thank you,</p> \n"
+"                <p><t t-out=\"object.company_id.name\"/></p> -->\n"
+"                <!--<br/>\n"
+"                <div style=\"width: 375px; margin: 0px; padding: 0px; "
+"background-color: #8E0000; border-top-left-radius: 5px 5px; border-top-right-"
+"radius: 5px 5px; background-repeat: repeat no-repeat;\">\n"
+"                    <h3 style=\"margin: 0px; padding: 2px 14px; font-size: "
+"12px; color: #DDD;\">\n"
+"                        <strong style=\"text-transform:uppercase;\">${user."
+"company_id.name}</strong></h3>\n"
+"                </div>\n"
+"                <div style=\"width: 347px; margin: 0px; padding: 5px 14px; "
+"line-height: 16px; background-color: #F2F2F2;\">\n"
+"                    <span style=\"color: #222; margin-bottom: 5px; display: "
+"block; \">\n"
+"                        ${user.company_id.partner_id.sudo()."
+"with_context(show_address=True, html_format=True).name_get()[0][1] | safe}\n"
+"                    </span>\n"
+"                    % if user.company_id.phone:\n"
+"                        <div style=\"margin-top: 0px; margin-right: 0px; "
+"margin-bottom: 0px; margin-left: 0px; padding-top: 0px; padding-right: 0px; "
+"padding-bottom: 0px; padding-left: 0px; \">\n"
+"                            Phone:&nbsp; ${object.company_id.phone}\n"
+"                        </div>\n"
+"                    % endif\n"
+"                    % if user.company_id.website:\n"
+"                        <div>\n"
+"                            Web :&nbsp;<a href=\"${object.company_id."
+"website}\">${user.company_id.website}</a>\n"
+"                        </div>\n"
+"                    %endif\n"
+"                    <p></p>\n"
+"                </div>-->\n"
+"            </div>\n"
+"            <!-- ]]> -->\n"
+"            "
+msgstr ""
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:mail.template,body_html:tactecs_dt_department_requisition_purachase_inventory.email_purchase_requisition
+msgid ""
+"<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-"
+"serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"                <p>Dear <!-- ${object.requisiton_responsible_id.name} -->\n"
+"                  <t t-out=\"object.requisiton_responsible_id.name\"/>,</"
+"p><br/>\n"
+"                <p>Please approve the request for material requisition with "
+"reference number <!-- ${object.name} -->\n"
+"                  <t t-out=\"object.name\"/>.</p> <br/>\n"
+"                <p>Do not hesitate to contact us if you have any questions.</"
+"p>\n"
+"                <!-- <p>Thank you,</p> \n"
+"                <p><t t-out=\"object.company_id.name\"/></p> -->\n"
+"                <!-- <br/>\n"
+"                <div style=\"width: 375px; margin: 0px; padding: 0px; "
+"background-color: #8E0000; border-top-left-radius: 5px 5px; border-top-right-"
+"radius: 5px 5px; background-repeat: repeat no-repeat;\">\n"
+"                    <h3 style=\"margin: 0px; padding: 2px 14px; font-size: "
+"12px; color: #DDD;\">\n"
+"                        <strong style=\"text-transform:uppercase;\">${user."
+"company_id.name}</strong></h3>\n"
+"                </div>\n"
+"                <div style=\"width: 347px; margin: 0px; padding: 5px 14px; "
+"line-height: 16px; background-color: #F2F2F2;\">\n"
+"                    <span style=\"color: #222; margin-bottom: 5px; display: "
+"block; \">\n"
+"                        ${user.company_id.partner_id.sudo()."
+"with_context(show_address=True, html_format=True).name_get()[0][1] | safe}\n"
+"                    </span>\n"
+"                    % if user.company_id.phone:\n"
+"                        <div style=\"margin-top: 0px; margin-right: 0px; "
+"margin-bottom: 0px; margin-left: 0px; padding-top: 0px; padding-right: 0px; "
+"padding-bottom: 0px; padding-left: 0px; \">\n"
+"                            Phone:&nbsp; ${object.company_id.phone}\n"
+"                        </div>\n"
+"                    % endif\n"
+"                    % if user.company_id.website:\n"
+"                        <div>\n"
+"                            Web :&nbsp;<a href=\"${object.company_id."
+"website}\">${user.company_id.website}</a>\n"
+"                        </div>\n"
+"                    %endif\n"
+"                    <p></p>\n"
+"                </div> -->\n"
+"            </div>\n"
+"            <!-- ]]> -->\n"
+"            "
+msgstr ""
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:mail.template,body_html:tactecs_dt_department_requisition_purachase_inventory.email_purchase_requisition_iruser_custom
+msgid ""
+"<div style=\"font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-"
+"serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"            <p>Dear <!-- ${object.employee_id.name} --><t t-out=\"object."
+"employee_id.name\"/>,</p><br/>\n"
+"            <p>This mail is to inform you that material requisition request "
+"number <!--  ${object.name} --> <t t-out=\"object.name\"/> is approved by "
+"the department manager.</p> <br/>\n"
+"            <p>Do not hesitate to contact us if you have any questions.</p>\n"
+"           <!--  <p>Thank You,</p>\n"
+"            <p><t t-out=\"object.company_id.name\" /></p> -->\n"
+"            <br/>\n"
+"            <!-- <div style=\"width: 375px; margin: 0px; padding: 0px; "
+"background-color: #8E0000; border-top-left-radius: 5px 5px; border-top-right-"
+"radius: 5px 5px; background-repeat: repeat no-repeat;\">\n"
+"                    <h3 style=\"margin: 0px; padding: 2px 14px; font-size: "
+"12px; color: #DDD;\">\n"
+"                        <strong style=\"text-transform:uppercase;\">${user."
+"company_id.name}</strong></h3>\n"
+"                </div>\n"
+"                <div style=\"width: 347px; margin: 0px; padding: 5px 14px; "
+"line-height: 16px; background-color: #F2F2F2;\">\n"
+"                    <span style=\"color: #222; margin-bottom: 5px; display: "
+"block; \">\n"
+"                        ${user.company_id.partner_id.sudo()."
+"with_context(show_address=True, html_format=True).name_get()[0][1] | safe}\n"
+"                    </span>\n"
+"                    % if user.company_id.phone:\n"
+"                        <div style=\"margin-top: 0px; margin-right: 0px; "
+"margin-bottom: 0px; margin-left: 0px; padding-top: 0px; padding-right: 0px; "
+"padding-bottom: 0px; padding-left: 0px; \">\n"
+"                            Phone:&nbsp; ${object.company_id.phone}\n"
+"                        </div>\n"
+"                    % endif\n"
+"                    % if user.company_id.website:\n"
+"                        <div>\n"
+"                            Web :&nbsp;<a href=\"${object.company_id."
+"website}\">${user.company_id.website}</a>\n"
+"                        </div>\n"
+"                    %endif\n"
+"                    <p></p>\n"
+"                </div> -->\n"
+"            </div>\n"
+"            <!-- ]]> -->"
+msgstr ""
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.purchase_requisition
+msgid "<strong>Analytic Account</strong>"
+msgstr ""
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.purchase_requisition
+msgid "<strong>Approved By </strong>"
+msgstr ""
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.purchase_requisition
+msgid "<strong>Approved Date </strong>"
+msgstr ""
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.purchase_requisition
+msgid "<strong>Approver Signature:____________________</strong>"
+msgstr ""
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.purchase_requisition
+msgid "<strong>Company</strong>"
+msgstr ""
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.purchase_requisition
+msgid "<strong>Confirmed By</strong>"
+msgstr ""
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.purchase_requisition
+msgid "<strong>Confirmed Date</strong>"
+msgstr ""
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.purchase_requisition
+msgid "<strong>Date:____________________</strong>"
+msgstr ""
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.purchase_requisition
+msgid "<strong>Department </strong>"
+msgstr ""
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.purchase_requisition
+msgid "<strong>Department Approval Date</strong>"
+msgstr ""
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.purchase_requisition
+msgid "<strong>Department Manager Signature:____________________</strong>"
+msgstr ""
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.purchase_requisition
+msgid "<strong>Department Manager</strong>"
+msgstr ""
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.purchase_requisition
+msgid "<strong>Description</strong>"
+msgstr ""
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.purchase_requisition
+msgid "<strong>Destination Location </strong>"
+msgstr ""
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.purchase_requisition
+msgid "<strong>Employee Signature:____________________</strong>"
+msgstr ""
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.purchase_requisition
+msgid "<strong>Employee</strong>"
+msgstr ""
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.purchase_requisition
+msgid "<strong>Internal Picking</strong>"
+msgstr ""
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.purchase_requisition
+msgid "<strong>Product</strong>"
+msgstr ""
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.purchase_requisition
+msgid "<strong>Quantity</strong>"
+msgstr ""
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.purchase_requisition
+msgid "<strong>Received Date</strong>"
+msgstr ""
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.purchase_requisition
+msgid "<strong>Rejected By </strong>"
+msgstr ""
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.purchase_requisition
+msgid "<strong>Rejected Date</strong>"
+msgstr ""
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.purchase_requisition
+msgid "<strong>Requisition Action</strong>"
+msgstr ""
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.purchase_requisition
+msgid "<strong>Requisition Date</strong>"
+msgstr ""
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.purchase_requisition
+msgid "<strong>Requisition Deadline</strong>"
+msgstr ""
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.purchase_requisition
+msgid "<strong>Requisition Responsible</strong>"
+msgstr ""
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.purchase_requisition
+msgid "<strong>Source Location</strong>"
+msgstr ""
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.purchase_requisition
+msgid "<strong>Unit of Measure</strong>"
+msgstr ""
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.purchase_requisition
+msgid "<strong>Vendors</strong>"
+msgstr ""
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__access_warning
+msgid "Access warning"
+msgstr "تحذير الوصول"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__message_needaction
+msgid "Action Needed"
+msgstr "الإجراء مطلوب"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__activity_ids
+msgid "Activities"
+msgstr "الأنشطة"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr "ترتيب استثناء النشاط"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__activity_state
+msgid "Activity State"
+msgstr "حالة النشاط"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__activity_type_icon
+msgid "Activity Type Icon"
+msgstr "أيقونة نوع النشاط"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.material_purchase_requisition_form_view_custody_manager
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.material_purchase_requisition_form_view_department_manager
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.material_purchase_requisition_form_view_employee
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.material_purchase_requisition_form_view_inventory_manager
+msgid "Add Reason for Internal Requistion ...."
+msgstr "أضافه سبب لأعاده الطلب الداخلي...."
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__analytic_account_id
+msgid "Analytic Account"
+msgstr "الحساب التحليلي"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:mail.template,name:tactecs_dt_department_requisition_purachase_inventory.email_purchase_requisition
+msgid ""
+"Approval Request for Purchase Requisition to Purchase User - Send by Email"
+msgstr ""
+"طلب الموافقة على طلب الشراء لمستخدم الشراء - أرسل عبر البريد الإلكتروني"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:mail.template,subject:tactecs_dt_department_requisition_purachase_inventory.email_purchase_requisition
+msgid ""
+"Approval Request for Purchase Requisition to Purchase User - {{object.name}}"
+msgstr "طلب الموافقة على طلب الشراء لمستخدم الشراء - {{object.name}}"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.material_purchase_requisition_form_view_inventory_manager
+msgid "Approve"
+msgstr "موافقة"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.material_purchase_requisition_search_view
+msgid "Approve By"
+msgstr "الموافقة من قبل"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields.selection,name:tactecs_dt_department_requisition_purachase_inventory.selection__material_purchase_requisition__state__approve
+msgid "Approved"
+msgstr "تمت الموافقة"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__userrapp_date
+msgid "Approved Date"
+msgstr "تاريخ الموافقة"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__approve_employee_id
+msgid "Approved by"
+msgstr "تمت الموافقة عليها من قبل"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__message_attachment_count
+msgid "Attachment Count"
+msgstr "عدد المرفقات"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.material_purchase_requisition_form_view_employee
+msgid "Cancel"
+msgstr "إلغاء"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields.selection,name:tactecs_dt_department_requisition_purachase_inventory.selection__material_purchase_requisition__state__cancel
+msgid "Cancelled"
+msgstr "ملغى"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__company_id
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.material_purchase_requisition_search_view
+msgid "Company"
+msgstr "الشركة"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.material_purchase_requisition_form_view_employee
+msgid "Confirm"
+msgstr "تأكيد"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__confirm_date
+msgid "Confirmed Date"
+msgstr "تاريخ تأكيد"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__employee_confirm_id
+msgid "Confirmed by"
+msgstr "تم التأكيد من قبل"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.material_purchase_requisition_form_view_inventory_manager
+msgid "Create Picking and PO"
+msgstr "إنشاء حركة مخزنية وأمر الشراء"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__create_uid
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition_line__create_uid
+msgid "Created by"
+msgstr "أنشئ بواسطة"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__create_date
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition_line__create_date
+msgid "Created on"
+msgstr "أنشئ في"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.ui.menu,name:tactecs_dt_department_requisition_purachase_inventory.menu_action_purchase_requisition_custody_manager
+msgid "Custody Management"
+msgstr "إدارة العهدة"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,help:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__access_url
+msgid "Customer Portal URL"
+msgstr "رابط بوابة العملاء"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__date_done
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.material_purchase_requisition_search_view
+msgid "Date Done"
+msgstr "تاريخ الانتهاء"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,help:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__date_done
+msgid "Date of Completion of Purchase Requisition"
+msgstr "تاريخ إتمام طلب الشراء"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.material_purchase_requisition_search_view
+msgid "Delivery Picking"
+msgstr "حركة مخزنية للتسليم"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model,name:tactecs_dt_department_requisition_purachase_inventory.model_hr_department
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__department_id
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.material_purchase_requisition_search_view
+msgid "Department"
+msgstr "الإدارة"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__managerapp_date
+msgid "Department Approval Date"
+msgstr "تاريخ اعتماد الإدارة"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:mail.template,name:tactecs_dt_department_requisition_purachase_inventory.email_purchase_requisition_iruser_custom
+msgid "Department Approval Purchase Requisition - Send by Email"
+msgstr "طلب شراء موافقة الإدارة - أرسل عبر البريد الإلكتروني"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:mail.template,subject:tactecs_dt_department_requisition_purachase_inventory.email_purchase_requisition_iruser_custom
+msgid "Department Approval Purchase Requisition - {{object.name}}"
+msgstr "طلب شراء موافقة الإدارة - {{object.name}}"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.material_purchase_requisition_form_view_department_manager
+msgid "Department Approve"
+msgstr "موافقة الادارة"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__approve_manager_id
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.material_purchase_requisition_search_view
+msgid "Department Manager"
+msgstr "مدير الإدارة"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__reject_manager_id
+msgid "Department Manager Reject"
+msgstr "رفض مدير الإدارة"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__manareject_date
+msgid "Department Manager Reject Date"
+msgstr "تاريخ رفض مدير الإدارة"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.actions.act_window,name:tactecs_dt_department_requisition_purachase_inventory.action_material_purchase_requisition_department_manager
+#: model:ir.ui.menu,name:tactecs_dt_department_requisition_purachase_inventory.menu_action_purchase_requisition_department_manager
+msgid "Department Requisitions"
+msgstr "طلبات الإدارة"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition_line__description
+msgid "Description"
+msgstr "الوصف"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_hr_department__dest_location_id
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_hr_employee__dest_location_id
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__dest_location_id
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.material_purchase_requisition_search_view
+msgid "Destination Location"
+msgstr "موقع الوجهة"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__display_name
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition_line__display_name
+msgid "Display Name"
+msgstr "اسم العرض"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model,name:tactecs_dt_department_requisition_purachase_inventory.model_hr_employee
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__employee_id
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.material_purchase_requisition_search_view
+msgid "Employee"
+msgstr "الموظف"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.actions.act_window,name:tactecs_dt_department_requisition_purachase_inventory.action_material_purchase_requisition_employee
+#: model:ir.ui.menu,name:tactecs_dt_department_requisition_purachase_inventory.menu_action_purchase_requisition_employee
+msgid "Employee Requisitions"
+msgstr "طلبات الموظفين"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.purchase_requisition_employee_form_view
+msgid "Employee's responsibility"
+msgstr "عهدة الموظف"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__message_follower_ids
+msgid "Followers"
+msgstr "متابعون"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "المتابعون (الشركاء)"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,help:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr "أيفونه الخط Font awesome مثلاً fa-tasks"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.material_purchase_requisition_search_view
+msgid "Group By"
+msgstr "تجميع حسب"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__has_message
+msgid "Has Message"
+msgstr "توجد رسالة"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__id
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition_line__id
+msgid "ID"
+msgstr "المعرف"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__activity_exception_icon
+msgid "Icon"
+msgstr "أيقونة"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,help:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr "الأيقونة للإشارة إلى استثناء النشاط."
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,help:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "عند التفعيل ، رسائل جديدة ستتطلب انتباهك"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,help:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__message_has_error
+#: model:ir.model.fields,help:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr "إذا تم تحديده ، فإن بعض الرسائل بها خطأ في التسليم."
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__delivery_picking_id
+#: model:ir.model.fields.selection,name:tactecs_dt_department_requisition_purachase_inventory.selection__material_purchase_requisition_line__requisition_type__internal
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.material_purchase_requisition_form_view_custody_manager
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.material_purchase_requisition_form_view_department_manager
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.material_purchase_requisition_form_view_employee
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.material_purchase_requisition_form_view_inventory_manager
+msgid "Internal Picking"
+msgstr "الحركات المخزنية الداخلية"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__message_is_follower
+msgid "Is Follower"
+msgstr "متابع"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__write_uid
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition_line__write_uid
+msgid "Last Updated by"
+msgstr "آخر تحديث بواسطة"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__write_date
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition_line__write_date
+msgid "Last Updated on"
+msgstr "آخر تحديث في"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,help:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__date_end
+msgid "Last date for the product to be needed"
+msgstr "اخر تاريخ تحتاج فيه المنتج"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.material_purchase_requisition_search_view
+msgid "Location"
+msgstr "الموقع"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.material_purchase_requisition_search_view
+msgid "Manager Approve Date"
+msgstr "تاريخ موافقة المدير "
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:res.groups,name:tactecs_dt_department_requisition_purachase_inventory.group_purchase_requisition_department
+msgid "Material Purchase Requisition Department Manager"
+msgstr "مدير الإدارة طلب المواد"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:res.groups,name:tactecs_dt_department_requisition_purachase_inventory.group_purchase_requisition_employee
+msgid "Material Purchase Requisition Employee"
+msgstr "موظف طلب المواد"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model,name:tactecs_dt_department_requisition_purachase_inventory.model_material_purchase_requisition_line
+msgid "Material Purchase Requisition Lines"
+msgstr "بنود طلب المواد"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:res.groups,name:tactecs_dt_department_requisition_purachase_inventory.group_purchase_requisition_manager
+msgid "Material Purchase Requisition Manager"
+msgstr "طلب المواد- اعتماد مدير المخزن"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__message_has_error
+msgid "Message Delivery error"
+msgstr "خطأ تسليم الرسالة"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__message_ids
+msgid "Messages"
+msgstr "الرسائل"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr "الموعد النهائي لنشاطي"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields.selection,name:tactecs_dt_department_requisition_purachase_inventory.selection__material_purchase_requisition__state__draft
+msgid "New"
+msgstr "جديد"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "الموعد النهائي للنشاط التالي"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__activity_summary
+msgid "Next Activity Summary"
+msgstr "ملخص النشاط التالي"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__activity_type_id
+msgid "Next Activity Type"
+msgstr "نوع النشاط التالي"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__name
+msgid "Number"
+msgstr "رقم"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__message_needaction_counter
+msgid "Number of Actions"
+msgstr "عدد الإجراءات"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__message_has_error_counter
+msgid "Number of errors"
+msgstr "عدد الأخطاء"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,help:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr "عدد الرسائل التي تتطلب عمل عليها"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,help:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "عدد الرسائل التي بها خطأ في التسليم"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.material_purchase_requisition_form_view_custody_manager
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.material_purchase_requisition_form_view_department_manager
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.material_purchase_requisition_form_view_employee
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.material_purchase_requisition_form_view_inventory_manager
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.purchase_requisition
+msgid "Other Information"
+msgstr "معلومات أخرى"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.material_purchase_requisition_form_view_custody_manager
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.material_purchase_requisition_form_view_inventory_manager
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.purchase_requisition
+msgid "Picking Details"
+msgstr "تفاصيل الحركات المخزنية"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__custom_picking_type_id
+msgid "Picking Type"
+msgstr "نوع الحركة المخزنية"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#. odoo-python
+#: code:addons/tactecs_dt_department_requisition_purachase_inventory/models/purchase_requisition.py:0
+msgid "Please create some requisition lines."
+msgstr "يرجى إنشاء بعض بنود الطلبات."
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#. odoo-python
+#: code:addons/tactecs_dt_department_requisition_purachase_inventory/models/purchase_requisition.py:0
+msgid ""
+"Please enter atleast one vendor on Requisition Lines for Requisition Action "
+"Purchase"
+msgstr "يرجى إدخال مورد واحد على الأقل في بنود الطلب للشراء"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__access_url
+msgid "Portal Access URL"
+msgstr "رابط الوصول لبوابة العملاء"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition_line__product_id
+msgid "Product"
+msgstr "المنتج"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model,name:tactecs_dt_department_requisition_purachase_inventory.model_product_product
+msgid "Product Variant"
+msgstr "متغير المنتج"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model,name:tactecs_dt_department_requisition_purachase_inventory.model_purchase_order
+#: model:ir.model.fields.selection,name:tactecs_dt_department_requisition_purachase_inventory.selection__material_purchase_requisition_line__requisition_type__purchase
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.material_purchase_requisition_form_view_custody_manager
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.material_purchase_requisition_form_view_department_manager
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.material_purchase_requisition_form_view_employee
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.material_purchase_requisition_form_view_inventory_manager
+msgid "Purchase Order"
+msgstr "أمر شراء"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields.selection,name:tactecs_dt_department_requisition_purachase_inventory.selection__material_purchase_requisition__state__stock
+msgid "Purchase Order Created"
+msgstr "تم إنشاء أمر الشراء"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model,name:tactecs_dt_department_requisition_purachase_inventory.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr "سطر أمر شراء"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__purchase_order_ids
+msgid "Purchase Ordes"
+msgstr "اوامر الشراء"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.actions.report,name:tactecs_dt_department_requisition_purachase_inventory.report_purchase_requisition
+#: model:ir.model,name:tactecs_dt_department_requisition_purachase_inventory.model_material_purchase_requisition
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_stock_picking__custom_requisition_id
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.purchase_requisition
+msgid "Purchase Requisition"
+msgstr "طلبات الإدارة"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.purchase_requisition_employee_form_view
+msgid "Purchase Requisition Settings"
+msgstr "إعدادات طلبات الإدارة"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__requisition_line_ids
+msgid "Purchase Requisitions Line"
+msgstr "بنود طلبات الإدارة"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.material_purchase_requisition_search_view
+msgid "Purchase Requistion search"
+msgstr "البحث عن طلب الإدارة"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition_line__qty
+msgid "Quantity"
+msgstr "الكمية"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.material_purchase_requisition_search_view
+msgid "Reason"
+msgstr "السبب"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.purchase_requisition
+msgid "Reason for Requisition"
+msgstr "سبب المطالبة"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__reason
+msgid "Reason for Requisitions"
+msgstr "سبب الطلبات"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields.selection,name:tactecs_dt_department_requisition_purachase_inventory.selection__material_purchase_requisition__state__receive
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.material_purchase_requisition_form_view_inventory_manager
+msgid "Received"
+msgstr "تم الاستلام"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__receive_date
+msgid "Received Date"
+msgstr "تاريخ الاستلام"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.material_purchase_requisition_form_view_department_manager
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.material_purchase_requisition_form_view_inventory_manager
+msgid "Reject"
+msgstr "رفض"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields.selection,name:tactecs_dt_department_requisition_purachase_inventory.selection__material_purchase_requisition__state__reject
+msgid "Rejected"
+msgstr "مرفوض"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__userreject_date
+msgid "Rejected Date"
+msgstr "تاريخ الرفض"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__reject_employee_id
+msgid "Rejected by"
+msgstr "مرفوض من قبل"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.material_purchase_requisition_search_view
+msgid "Reqisition Date"
+msgstr "تاريخ الطلب"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.material_purchase_requisition_search_view
+msgid "Reqisition Dedline"
+msgstr "آخر تاريخ للطلب"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:mail.template,name:tactecs_dt_department_requisition_purachase_inventory.email_confirm_material_purchase_requistion
+msgid "Request for Material Purchase Requisition - Send by Email"
+msgstr "طلب شراء مواد - أرسل عبر البريد الإلكتروني"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:mail.template,subject:tactecs_dt_department_requisition_purachase_inventory.email_confirm_material_purchase_requistion
+msgid "Request for Material Purchase Requisition - {{object.name}}"
+msgstr "طلب شراء مواد - {{object.name}}"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.ui.menu,name:tactecs_dt_department_requisition_purachase_inventory.menu_item_purchase_requisition
+msgid "Requisition"
+msgstr "طلب"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition_line__requisition_type
+msgid "Requisition Action"
+msgstr "إجراء على الطلب"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__request_date
+msgid "Requisition Date"
+msgstr "تاريخ الطلبات"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__date_end
+msgid "Requisition Deadline"
+msgstr "الموعد النهائي للطلب"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.purchase_requisition
+msgid "Requisition Lines"
+msgstr "بنود الطلب"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__requisiton_responsible_id
+msgid "Requisition Responsible"
+msgstr "المسؤول عن الطلب"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition_line__requisition_id
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_purchase_order__custom_requisition_id
+#: model:ir.ui.menu,name:tactecs_dt_department_requisition_purachase_inventory.menu_purchase_requisition
+msgid "Requisitions"
+msgstr "طلبات الإدارة"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_purchase_order_line__custom_requisition_line_id
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_stock_move__custom_requisition_line_id
+msgid "Requisitions Line"
+msgstr "بند الطلبات"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.material_purchase_requisition_form_view_custody_manager
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.material_purchase_requisition_form_view_department_manager
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.material_purchase_requisition_form_view_employee
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.material_purchase_requisition_form_view_inventory_manager
+msgid "Requisitions Lines"
+msgstr "بنود  الطلبات"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.actions.act_window,name:tactecs_dt_department_requisition_purachase_inventory.action_material_purchase_requisition_custody_manager
+#: model:ir.actions.act_window,name:tactecs_dt_department_requisition_purachase_inventory.action_material_purchase_requisition_inventory_manager
+#: model:ir.ui.menu,name:tactecs_dt_department_requisition_purachase_inventory.menu_action_purchase_requisition_inventory_manager
+msgid "Requisitions Management"
+msgstr "إدارة الطلبات"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.material_purchase_requisition_form_view_department_manager
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.material_purchase_requisition_form_view_employee
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.material_purchase_requisition_form_view_inventory_manager
+msgid "Reset to Draft"
+msgstr "إعادة التعيين كمسودة"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__activity_user_id
+msgid "Responsible User"
+msgstr "المستخدم المسئول"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr "خطأ في تسليم الرسائل القصيرة"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__access_token
+msgid "Security Token"
+msgstr "رمز الحماية"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#. odoo-python
+#: code:addons/tactecs_dt_department_requisition_purachase_inventory/models/purchase_requisition.py:0
+msgid "Select Destination location under the picking details."
+msgstr "حدد موقع الوجهة ضمن البنود"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#. odoo-python
+#: code:addons/tactecs_dt_department_requisition_purachase_inventory/models/purchase_requisition.py:0
+msgid "Select Picking Type under the picking details."
+msgstr "حدد نوع الطلب (صرف / شراء) ضمن بنود الطلب"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#. odoo-python
+#: code:addons/tactecs_dt_department_requisition_purachase_inventory/models/purchase_requisition.py:0
+msgid "Select Source location under the picking details."
+msgstr "حدد موقع المصدر ضمن بنود الطلب."
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__location_id
+msgid "Source Location"
+msgstr "مكان المصدر"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__state
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.material_purchase_requisition_search_view
+msgid "State"
+msgstr "الحالة"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,help:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+"الحالة على أساس الأنشطة\n"
+"المتأخرة: تاريخ الاستحقاق انقضى\n"
+"اليوم: تاريخ النشاط هو اليوم\n"
+"المخطط: الأنشطة المستقبلية."
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model,name:tactecs_dt_department_requisition_purachase_inventory.model_stock_move
+msgid "Stock Move"
+msgstr "حركة المخزون "
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model,name:tactecs_dt_department_requisition_purachase_inventory.model_stock_picking
+msgid "Transfer"
+msgstr "تحويل"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,help:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr "نوع النشاط الاستثنائي على السجل."
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition_line__uom
+msgid "Unit of Measure"
+msgstr "وحده القياس"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.material_purchase_requisition_search_view
+msgid "User Approve Date"
+msgstr "تاريخ موافقة المستخدم"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.internal_requisition_stock_form_view
+msgid "Validate"
+msgstr "التحقق"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition_line__partner_id
+msgid "Vendors"
+msgstr "البائعين"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields.selection,name:tactecs_dt_department_requisition_purachase_inventory.selection__material_purchase_requisition__state__dept_confirm
+msgid "Waiting Department Approval"
+msgstr "في انتظار موافقة مدير  الإدارة"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields.selection,name:tactecs_dt_department_requisition_purachase_inventory.selection__material_purchase_requisition__state__ir_approve
+msgid "Waiting IR Approval"
+msgstr "موافقة المراجعة الداخلية"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__website_message_ids
+msgid "Website Messages"
+msgstr "رسائل موقع الانترنت"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,help:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__website_message_ids
+msgid "Website communication history"
+msgstr "سجل تواصل موقع الانترنت"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#. odoo-python
+#: code:addons/tactecs_dt_department_requisition_purachase_inventory/models/purchase_requisition.py:0
+msgid ""
+"You can not delete Purchase Requisition which is not in draft or cancelled "
+"or rejected state."
+msgstr ""
+"لا يمكنك حذف طلب الشراء/طلب الصرف الذي ليس في الحالة المسودة أو الملغية أو "
+"المرفوضة."
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.material_purchase_requisition_form_view_custody_manager
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.material_purchase_requisition_form_view_department_manager
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.material_purchase_requisition_form_view_employee
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.material_purchase_requisition_form_view_inventory_manager
+msgid "confirm"
+msgstr "تأكيد"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.internal_requisition_stock_form_view
+msgid "إطلاع كاتب الشطب"
+msgstr "إطلاع كاتب الشطب"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_stock_picking__writer_review
+msgid "إطلاع كاتب الشطب "
+msgstr "إطلاع كاتب الشطب "
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.material_purchase_requisition_form_view_custody_manager
+msgid "ارجاع العهدة"
+msgstr "ارجاع العهدة"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_material_purchase_requisition__custody_return_requested
+msgid "تم  طلب ارجاع العهدة"
+msgstr "تم  طلب ارجاع العهدة"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields.selection,name:tactecs_dt_department_requisition_purachase_inventory.selection__stock_picking__custody_state__new
+msgid "جديد"
+msgstr "جديد"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_product_product__custody_state
+msgid "حالة العهدة"
+msgstr "حالة العهدة"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_stock_picking__custody_state
+msgid "حالة المنتج"
+msgstr "حالة المنتج"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields.selection,name:tactecs_dt_department_requisition_purachase_inventory.selection__stock_picking__custody_state__fixable
+msgid "قابل للإصلاح"
+msgstr "قابل للإصلاح"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields.selection,name:tactecs_dt_department_requisition_purachase_inventory.selection__stock_picking__custody_state__trash
+msgid "كهنة او خردة"
+msgstr "كهنة او خردة"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:res.groups,name:tactecs_dt_department_requisition_purachase_inventory.group_returns_committee
+msgid "لجنة الإرتجاع"
+msgstr "لجنة الإرتجاع"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields.selection,name:tactecs_dt_department_requisition_purachase_inventory.selection__product_product__custody_state__sustainable
+msgid "مستديم"
+msgstr "مستديم"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields.selection,name:tactecs_dt_department_requisition_purachase_inventory.selection__stock_picking__custody_state__used
+msgid "مستعمل"
+msgstr "مستعمل"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields.selection,name:tactecs_dt_department_requisition_purachase_inventory.selection__product_product__custody_state__consumed
+msgid "مستهلك"
+msgstr "مستهلك"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_stock_picking__returns_committee_approved
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.internal_requisition_stock_form_view
+msgid "موافقة لجنة الإرتجاع"
+msgstr "موافقة لجنة الإرتجاع"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model_terms:ir.ui.view,arch_db:tactecs_dt_department_requisition_purachase_inventory.internal_requisition_stock_form_view
+msgid "موافقة مدير المخزن"
+msgstr "موافقة مدير المخزن"
+
+#. module: tactecs_dt_department_requisition_purachase_inventory
+#: model:ir.model.fields,field_description:tactecs_dt_department_requisition_purachase_inventory.field_stock_picking__inventory_manager_approved
+msgid "موافقة مدير المخزن "
+msgstr "موافقة مدير المخزن "

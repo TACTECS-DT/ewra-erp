@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+    
+        <record id="material_purchase_requisition_form_view_department_manager" model="ir.ui.view">
+            <field name="name">material.purchase.requisition.form.view.department.manager</field>
+            <field name="model">material.purchase.requisition</field>
+            <field name="arch" type="xml">
+                <form create="false">
+                    <header>
+<!--                        <button name="requisition_confirm" type="object" string="Confirm" -->
+<!--                        invisible="state !='draft'"-->
+<!--                        class="btn-primary" groups="base.group_user"/>-->
+                        <button name="manager_approve" type="object" string="Department Approve" 
+                        
+                            invisible="state !='dept_confirm'"
+                   class="btn-primary" groups="tactecs_dt_department_requisition_purachase_inventory.group_purchase_requisition_department"/>
+<!--                        <button name="user_approve" type="object" string="Approve" -->
+<!--                        -->
+<!--                        invisible="state !='ir_approve'"-->
+<!--                       class="btn-primary" groups="tactecs_dt_department_requisition_purachase_inventory.group_purchase_requisition_employee"/>-->
+
+<!--                       -->
+<!--                        <button name="request_stock" type="object" string="Create Picking and PO"-->
+<!--                        -->
+<!--                             invisible="state !='approve'"-->
+<!--                     class="btn-primary" groups="tactecs_dt_department_requisition_purachase_inventory.group_purchase_requisition_manager"/>-->
+<!--                        <button name="action_received" type="object" string="Received" -->
+<!--                        -->
+<!--                               invisible="state !='stock'"-->
+<!--                         class="btn-primary"/>-->
+                        <button name="requisition_reject" type="object" string="Reject" groups="tactecs_dt_department_requisition_purachase_inventory.group_purchase_requisition_department,tactecs_dt_department_requisition_purachase_inventory.group_purchase_requisition_employee"
+                        
+                           invisible="state not in ['dept_confirm','approve','ir_approve']"/>
+<!--                        <button name="action_cancel" type="object"-->
+<!--                         invisible="state !='draft'" string="Cancel" groups="base.group_user"/>-->
+                        <button name="reset_draft" type="object" string="Reset to Draft"
+                           invisible="state not in ['reject']" class="btn-primary"/>
+                        <field name="state" widget="statusbar" string="confirm"  
+                                        statusbar_visible="draft,dept_confirm,ir_approve,approve,stock,receive"/>
+                    </header>
+                    <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" type="object" icon="fa-truck"
+                                name="show_picking" string="Internal Picking" groups="stock.group_stock_user"/>
+                       <button class="oe_stat_button" type="object" icon="fa-book"
+                                name="action_show_po" groups="purchase.group_purchase_user"  string="Purchase Order"/>
+                    </div>
+                    <div class="oe_title">
+                        <div class="oe_title">
+                        <h1>
+                            <field name="name"/><br/>
+                        </h1>
+                    </div>
+                    </div>
+                        <group>
+                                <group>
+                                    <field name="employee_id" readonly="1"/>
+                                    <field name="department_id" readonly="1"/>
+                                    <field name="company_id" groups="base.group_multi_company"        readonly="state !='draft'"/>
+                                    <field name="requisiton_responsible_id" readonly="state not in ['approve','ir_approve'] " options="{'no_create': True ,'no_open': True}"/>
+                                </group>
+                                <group>
+                                    <field name="request_date" readonly="1"/>
+                                    <field name="receive_date" readonly="1"/>
+                                    <field name="date_end" readonly="state in ['reject','cancel','receive'] "/>
+                                    <field name="analytic_account_id" groups="analytic.group_analytic_accounting" readonly="state in ['reject','cancel','receive'] "/>
+                                </group>
+                             </group>
+                        <notebook>
+                            <page string="Requisitions Lines">
+                                <field name="requisition_line_ids"
+                                readonly="state not in ['draft','dept_confirm'] "
+                                 >
+                                    <list editable="bottom">
+                                        <field name="requisition_type" groups="tactecs_dt_department_requisition_purachase_inventory.group_purchase_requisition_manager"/>
+                                        <field name="product_id"/>
+                                        <field name="description"/>
+                                        <field name="qty"/>
+                                        <field name="uom"/>
+                                        <field name="partner_id" groups="tactecs_dt_department_requisition_purachase_inventory.group_purchase_requisition_manager"
+                                                 readonly="requisition_type !='purchase'"
+                                         widget="many2many_tags"/>
+                                    </list>
+                                </field>
+                                <group>
+                                    <field name="reason" readonly="state in ['reject','cancel','receive'] " placeholder="Add Reason for Internal Requistion ...."/>
+                                </group>
+                            </page>
+                            <page string="Other Information">
+                                <group>
+                                    <group>
+                                        <field name="employee_confirm_id"/>
+                                        <field name="approve_manager_id"/>
+                                        <field name="approve_employee_id"/>
+                                        <field name="reject_employee_id"/>
+                                    </group>
+                                    <group>
+                                        <field name="confirm_date"/>
+                                        <field name="managerapp_date"/>
+                                        <field name="userrapp_date"/>
+                                        <field name="userreject_date"/>
+                                    </group>
+                                </group>
+                            </page>
+                    </notebook>
+                    </sheet>
+                    <chatter/>
+<!--                    <div class="oe_chatter">-->
+<!--                        <field name="message_follower_ids" widget="mail_followers"/>-->
+<!--                        <field name="message_ids" widget="mail_thread"/>-->
+<!--                    </div>-->
+                </form>
+            </field>
+        </record>
+        
+        <record id="material_purchase_requisition_list_view_department_manager" model="ir.ui.view">
+            <field name="name">material.purchase.requisition.view.list.department.manager</field>
+            <field name="model">material.purchase.requisition</field>
+            <field name="arch" type="xml">
+                <list create="false">
+                    <field name="name"/>
+                    <field name="employee_id"/>
+                    <field name="department_id"/>
+                    <field name="request_date"/>
+                    <field name="date_end"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
+                    <field name="state"/>
+                </list>
+            </field>
+        </record>
+        
+
+        <record model="ir.actions.act_window" id="action_material_purchase_requisition_department_manager">
+            <field name="name">Department Requisitions</field>
+            <field name="res_model">material.purchase.requisition</field>
+            <!--<field name="view_type">form</field>-->
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <record id="action_material_purchase_requisition_department_manager_list" model="ir.actions.act_window.view">
+            <field name="act_window_id" ref="action_material_purchase_requisition_department_manager"/>
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="material_purchase_requisition_list_view_department_manager"/>
+        </record>
+
+        <record id="action_material_purchase_requisition_department_manager_form" model="ir.actions.act_window.view">
+            <field name="act_window_id" ref="action_material_purchase_requisition_department_manager"/>
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="material_purchase_requisition_form_view_department_manager"/>
+        </record>
+
+        <menuitem id="menu_action_purchase_requisition_department_manager" name="Department Requisitions" groups="tactecs_dt_department_requisition_purachase_inventory.group_purchase_requisition_department" parent="menu_item_purchase_requisition" action="action_material_purchase_requisition_department_manager"/>
+        
+    </data>
+</odoo>

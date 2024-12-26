@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+    
+        <record id="material_purchase_requisition_form_view_custody_manager" model="ir.ui.view">
+            <field name="name">material.purchase.requisition.form.view.custody.manager</field>
+            <field name="model">material.purchase.requisition</field>
+            <field name="arch" type="xml">
+                <form create="false" >
+                    <header>
+
+    <button  name="action_custody_return" groups="tactecs_dt_department_requisition_purachase_inventory.group_custody_manager" invisible="state !='receive' or custody_return_requested" type='object' string="ارجاع العهدة" />
+
+
+
+                        <field name="state" widget="statusbar" string="confirm"  
+                                        statusbar_visible="draft,dept_confirm,ir_approve,approve,stock,receive"/>
+                    </header>
+                    <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" type="object" icon="fa-truck"
+                                name="show_picking" string="Internal Picking" groups="stock.group_stock_user"/>
+                       <button class="oe_stat_button" type="object" icon="fa-book"
+                                name="action_show_po" groups="purchase.group_purchase_user"  string="Purchase Order"/>
+                    </div>
+                    <div class="oe_title">
+                        <div class="oe_title">
+                        <h1>
+                            <field name="name"/><br/>
+                        </h1>
+                    </div>
+                    </div>
+                        <group>
+                                <group>
+                                    <field name="custody_return_requested" force_save='1' readonly="1"/>
+                                    <field name="employee_id" readonly="1"/>
+                                    <field name="department_id" readonly="1"/>
+                                    <field name="company_id" groups="base.group_multi_company"        readonly="state !='draft'"/>
+                                    <field name="requisiton_responsible_id" readonly="state not in ['approve','ir_approve'] " options="{'no_create': True ,'no_open': True}"/>
+                                </group>
+                                <group>
+                                    <field name="request_date" readonly="1" force_save="1"/>
+                                    <field name="receive_date" readonly="1" force_save="1" />
+                                    <field name="date_end" readonly="state in ['reject','cancel','receive'] "/>
+                                    <field name="analytic_account_id" groups="analytic.group_analytic_accounting" readonly="state in ['reject','cancel','receive'] "/>
+                                </group>
+                             </group>
+                        <notebook>
+                            <page string="Requisitions Lines">
+                                <field name="requisition_line_ids"
+                                readonly="state in ['cancel','receive'] "
+                                 >
+                                    <list editable="bottom">
+                                        <field name="requisition_type" groups="tactecs_dt_department_requisition_purachase_inventory.group_custody_manager"/>
+                                        <field name="product_id"/>
+                                        <field name="description"/>
+                                        <field name="qty"/>
+                                        <field name="uom"/>
+                                        <field name="partner_id" groups="tactecs_dt_department_requisition_purachase_inventory.group_custody_manager"
+                                                 readonly="requisition_type !='purchase'"
+                                         widget="many2many_tags"/>
+
+
+                                    </list>
+                                </field>
+                                <group>
+                                    <field name="reason" readonly="state in ['reject','cancel','receive'] " placeholder="Add Reason for Internal Requistion ...."/>
+                                </group>
+                            </page>
+                            <page groups="tactecs_dt_department_requisition_purachase_inventory.group_purchase_requisition_employee,stock.group_stock_user" string="Picking Details"
+                            readonly="state == 'done'">
+                                <group>
+                                    <group>
+                                            <field name="location_id"
+                                                   groups="tactecs_dt_department_requisition_purachase_inventory.group_purchase_requisition_employee,stock.group_stock_user"
+                                                   domain="[('usage','!=', 'view')]" readonly="state in ['reject','cancel','receive'] "/>
+                                    </group>
+                                    <group>
+                                        <field name="dest_location_id" groups="tactecs_dt_department_requisition_purachase_inventory.group_purchase_requisition_employee,stock.group_stock_user" readonly="state in ['reject','cancel','receive'] "/>
+                                        <field name="delivery_picking_id" groups="tactecs_dt_department_requisition_purachase_inventory.group_purchase_requisition_employee,stock.group_stock_user"/>
+                                        <field name="custom_picking_type_id" groups="tactecs_dt_department_requisition_purachase_inventory.group_purchase_requisition_employee,stock.group_stock_user" readonly="state in ['reject','cancel','receive'] "/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Other Information">
+                                <group>
+                                    <group>
+                                        <field name="employee_confirm_id"/>
+                                        <field name="approve_manager_id"/>
+                                        <field name="approve_employee_id"/>
+                                        <field name="reject_employee_id"/>
+                                    </group>
+                                    <group>
+                                        <field name="confirm_date"/>
+                                        <field name="managerapp_date"/>
+                                        <field name="userrapp_date"/>
+                                        <field name="userreject_date"/>
+                                    </group>
+                                </group>
+                            </page>
+                    </notebook>
+                    </sheet>
+                    <chatter/>
+<!--                    <div class="oe_chatter">-->
+<!--                        <field name="message_follower_ids" widget="mail_followers"/>-->
+<!--                        <field name="message_ids" widget="mail_thread"/>-->
+<!--                    </div>-->
+                </form>
+            </field>
+        </record>
+        
+        <record id="material_purchase_requisition_list_view_custody_manager" model="ir.ui.view">
+            <field name="name">material.purchase.requisition.view.list.custody.manager</field>
+            <field name="model">material.purchase.requisition</field>
+            <field name="arch" type="xml">
+                <list create="false">
+                    <field name="name"/>
+                    <field name="employee_id"/>
+                    <field name="department_id"/>
+                    <field name="request_date"/>
+                    <field name="date_end"/>
+                    <field name="company_id" groups="base.group_multi_company"/>
+                    <field name="state"/>
+                </list>
+            </field>
+        </record>
+        
+        <record model="ir.actions.act_window" id="action_material_purchase_requisition_custody_manager">
+            <field name="name">Requisitions Management</field>
+            <field name="res_model">material.purchase.requisition</field>
+            <field name="domain">[('is_custody','=',True)]</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <record id="action_material_purchase_requisition_custody_manager_list" model="ir.actions.act_window.view">
+            <field name="act_window_id" ref="action_material_purchase_requisition_custody_manager"/>
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="material_purchase_requisition_list_view_custody_manager"/>
+        </record>
+
+        <record id="action_material_purchase_requisition_custody_manager_form" model="ir.actions.act_window.view">
+            <field name="act_window_id" ref="action_material_purchase_requisition_custody_manager"/>
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="material_purchase_requisition_form_view_custody_manager"/>
+        </record>
+        
+        <menuitem id="menu_action_purchase_requisition_custody_manager" name="Custody Management" groups="tactecs_dt_department_requisition_purachase_inventory.group_custody_manager" parent="menu_purchase_requisition" action="action_material_purchase_requisition_custody_manager"/>
+        
+    </data>
+</odoo>

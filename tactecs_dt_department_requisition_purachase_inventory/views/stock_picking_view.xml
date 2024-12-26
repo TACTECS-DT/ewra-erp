@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+    
+        <record id="internal_requisition_stock_form_view" model="ir.ui.view">
+            <field name="name">stock.picking.form.view</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='owner_id']" position="after">
+                    <field name="custom_requisition_id"/>
+                </xpath> 
+
+
+                 <xpath expr="//field[@name='location_dest_id']" position="after">
+                    <field name="custody_state" groups="tactecs_dt_department_requisition_purachase_inventory.group_returns_committee"  />
+                    <field name="returns_committee_approved" force_save="1" readonly="1" />
+                    <field name="inventory_manager_approved" force_save="1" readonly="1" />
+                    <field name="writer_review" force_save="1" readonly="1" />
+                    <field name="check_committee_approved" force_save="1" readonly="1" invisible="picking_type_code != 'incoming'"/>
+                    <field name="special_manager_approved" force_save="1" readonly="1" invisible="picking_type_code != 'incoming'"/>
+                </xpath>
+
+
+                 <xpath expr="//header" position="inside">
+
+
+
+                    <button name="action_returns_committee_approval" string="موافقة لجنة الإرتجاع" type="object"  groups="tactecs_dt_department_requisition_purachase_inventory.group_returns_committee" invisible="not custom_requisition_id or returns_committee_approved" />
+
+
+
+                 
+                    <button name="action_inventory_manager_approval" string="موافقة مدير المخزن " type="object"  groups="tactecs_dt_department_requisition_purachase_inventory.group_purchase_requisition_manager" invisible="not custom_requisition_id or inventory_manager_approved or not returns_committee_approved" />
+
+
+                 
+                    <button name="action_writer_review" string="إطلاع كاتب الشطب" type="object"  groups="tactecs_dt_department_requisition_purachase_inventory.group_writer_review" invisible="not custom_requisition_id or writer_review or not inventory_manager_approved" />
+                    <button name="action_check_committee_approved" string="موافقة لجنة الفحص" type="object"  groups="tactecs_dt_department_requisition_purachase_inventory.group_check_committee_approved" invisible="picking_type_code != 'incoming' or check_committee_approved" />
+                    <button name="action_special_manager_approved" string="موافقة السلطة المختصه" type="object"  groups="tactecs_dt_department_requisition_purachase_inventory.group_special_manager_approved" invisible="picking_type_code != 'incoming' or special_manager_approved" />
+
+                </xpath>
+
+
+
+            </field>
+        </record>
+        
+    </data>
+</odoo>
