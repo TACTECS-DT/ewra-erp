@@ -25,6 +25,7 @@
         'data/employee_purchase_approval_template.xml',
         'data/confirm_template_material_purchase.xml',
         'report/purchase_requisition_report.xml',
+        'wizard/reject.xml',
         'views/requisition_view_employee.xml',
         'views/requisition_view_department_manager.xml',
         'views/requisition_view_inventory_manager.xml',

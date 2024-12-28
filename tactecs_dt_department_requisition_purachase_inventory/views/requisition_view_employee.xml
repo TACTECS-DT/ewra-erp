@@ -40,6 +40,8 @@
                                         statusbar_visible="draft,dept_confirm,ir_approve,approve,stock,receive"/>
                     </header>
                     <sheet>
+                             <widget name="web_ribbon" title="Rejected" bg_color="text-bg-danger" invisible="state !='reject'"/>
+
                     <div class="oe_button_box" name="button_box">
                         <button class="oe_stat_button" type="object" icon="fa-truck"
                                 name="show_picking" string="Internal Picking" groups="stock.group_stock_user"/>
@@ -66,6 +68,10 @@
                                     <field name="request_date" invisible="1" force_save="1"/>
                                     <field name="receive_date" readonly="1" force_save="1"/>
                                     <field name="date_end" readonly="state in ['reject','cancel','receive'] "/>
+                           
+                                    <field name="state_text" />
+
+                                    
                                     <field name="analytic_account_id" groups="analytic.group_analytic_accounting" readonly="state in ['reject','cancel','receive'] "/>
                                 </group>
                              </group>
@@ -75,6 +81,8 @@
                                     <list editable="bottom">
                                         <field name="requisition_type" groups="tactecs_dt_department_requisition_purachase_inventory.group_purchase_requisition_manager"/>
                                         <field name="product_id" options="{'no_create': True ,'no_open': True}"/>
+                                        <field name="custody_state"/>
+                                  
                                         <field name="description"/>
                                         <field name="qty"/>
                                         <field name="uom"/>
@@ -108,6 +116,8 @@
                                         <field name="employee_confirm_id"/>
                                         <field name="approve_manager_id"/>
                                         <field name="approve_employee_id"/>
+                                        <field name="refuse_reason" force_save='1' readonly='1'/>
+
                                         <field name="reject_employee_id"/>
                                     </group>
                                     <group>

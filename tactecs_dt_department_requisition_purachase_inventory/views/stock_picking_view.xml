@@ -12,13 +12,44 @@
                 </xpath> 
 
 
+
                  <xpath expr="//field[@name='location_dest_id']" position="after">
-                    <field name="custody_state" groups="tactecs_dt_department_requisition_purachase_inventory.group_returns_committee"  />
-                    <field name="returns_committee_approved" force_save="1" readonly="1" />
-                    <field name="inventory_manager_approved" force_save="1" readonly="1" />
-                    <field name="writer_review" force_save="1" readonly="1" />
-                    <field name="check_committee_approved" force_save="1" readonly="1" invisible="picking_type_code != 'incoming'"/>
-                    <field name="special_manager_approved" force_save="1" readonly="1" invisible="picking_type_code != 'incoming'"/>
+                    <field name="custody_state" groups="tactecs_dt_department_requisition_purachase_inventory.group_returns_committee"  invisible='not is_requisition_return'  />
+                    <field name="is_requisition_return" force_save='1' readonly='1' invisible='1'  />
+                    
+                    <field name="breakdown_reason" groups="tactecs_dt_department_requisition_purachase_inventory.group_returns_committee"  invisible='not is_requisition_return' />
+
+                    <field name="returns_committee_approved" invisible='not is_requisition_return' force_save="1" readonly="1" />
+
+                    <field name="inventory_manager_approved" force_save="1" readonly="1" invisible='not is_requisition_return' />
+                    <field name="writer_review"  invisible='not is_requisition_return' force_save="1" readonly="1" />
+                    <field name="check_committee_approved"  force_save="1" readonly="1" invisible="picking_type_code != 'incoming' or  not is_requisition_return"/>
+
+                    <field name="special_manager_approved" force_save="1" readonly="1" invisible="picking_type_code != 'incoming'  or  not is_requisition_return"/>
+
+
+
+
+
+
+                
+                   <field name="requisition_number" force_save='1' readonly='state in ["done" ,"cancel"]' invisible='picking_type_code !="incoming"'
+               
+                   
+                     />
+      
+<field name="requisition_img_name" invisible="1" />
+                
+                   <field name="requisition_img" force_save='1' readonly='state in ["done" ,"cancel"]'     filename="requisition_img_name"  invisible='picking_type_code !="incoming"'  />
+
+
+
+
+
+
+
+
+
                 </xpath>
 
 
@@ -26,18 +57,18 @@
 
 
 
-                    <button name="action_returns_committee_approval" string="موافقة لجنة الإرتجاع" type="object"  groups="tactecs_dt_department_requisition_purachase_inventory.group_returns_committee" invisible="not custom_requisition_id or returns_committee_approved" />
+                    <button name="action_returns_committee_approval" string="موافقة لجنة الإرتجاع" type="object"  groups="tactecs_dt_department_requisition_purachase_inventory.group_returns_committee" invisible="not custom_requisition_id or returns_committee_approved or not  is_requisition_return" />
 
 
 
                  
-                    <button name="action_inventory_manager_approval" string="موافقة مدير المخزن " type="object"  groups="tactecs_dt_department_requisition_purachase_inventory.group_purchase_requisition_manager" invisible="not custom_requisition_id or inventory_manager_approved or not returns_committee_approved" />
+                    <button name="action_inventory_manager_approval" string="موافقة مدير المخزن " type="object"  groups="tactecs_dt_department_requisition_purachase_inventory.group_purchase_requisition_manager" invisible="not custom_requisition_id or inventory_manager_approved or not returns_committee_approved or not is_requisition_return" />
 
 
                  
-                    <button name="action_writer_review" string="إطلاع كاتب الشطب" type="object"  groups="tactecs_dt_department_requisition_purachase_inventory.group_writer_review" invisible="not custom_requisition_id or writer_review or not inventory_manager_approved" />
-                    <button name="action_check_committee_approved" string="موافقة لجنة الفحص" type="object"  groups="tactecs_dt_department_requisition_purachase_inventory.group_check_committee_approved" invisible="picking_type_code != 'incoming' or check_committee_approved" />
-                    <button name="action_special_manager_approved" string="موافقة السلطة المختصه" type="object"  groups="tactecs_dt_department_requisition_purachase_inventory.group_special_manager_approved" invisible="picking_type_code != 'incoming' or special_manager_approved" />
+                    <button name="action_writer_review" string="إطلاع كاتب الشطب" type="object"  groups="tactecs_dt_department_requisition_purachase_inventory.group_writer_review" invisible="not custom_requisition_id or writer_review or not inventory_manager_approved or not is_requisition_return" />
+                    <button name="action_check_committee_approved" string="موافقة لجنة الفحص" type="object"  groups="tactecs_dt_department_requisition_purachase_inventory.group_check_committee_approved" invisible="picking_type_code != 'incoming' or check_committee_approved or not is_requisition_return" />
+                    <button name="action_special_manager_approved" string="موافقة السلطة المختصه" type="object"  groups="tactecs_dt_department_requisition_purachase_inventory.group_special_manager_approved" invisible="picking_type_code != 'incoming' or special_manager_approved or not is_requisition_return" />
 
                 </xpath>
 

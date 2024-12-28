@@ -10,6 +10,10 @@
         <record id="group_custody_manager" model="res.groups">
             <field name="name">  مسؤل العهدة</field>
         </record>        
+        
+        <record id="group_inventory_disbursed" model="res.groups">
+            <field name="name"> صرف المنتجات </field>
+        </record>        
 
 
         <record id="group_returns_committee" model="res.groups">

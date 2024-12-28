@@ -18,17 +18,28 @@ class StockPicking(models.Model):
     custody_state = fields.Selection(selection=[("new","جديد"),("used","مستعمل") ,("fixable","قابل للإصلاح"),("trash","كهنة او خردة")],string='حالة المنتج')
 
     returns_committee_approved = fields.Boolean("موافقة لجنة الإرتجاع",store=True)
+    is_requisition_return = fields.Boolean('is_requisition_return',store=True)
+    breakdown_reason = fields.Char("سبب العطل",store=True)
     inventory_manager_approved = fields.Boolean("موافقة مدير المخزن ",store=True)
     writer_review = fields.Boolean("إطلاع كاتب الشطب ",store=True)
 
     check_committee_approved = fields.Boolean("موافقة لجنة الفحص",store=True)
     special_manager_approved = fields.Boolean("موافقة السلطة المختصه",store=True)
+   
+
+    requisition_number = fields.Char("رقم اذن الطلب",store=True)
+
+    requisition_img = fields.Binary("صورة الطلب",store=True)
+    requisition_img_name = fields.Char()
 
 
     def action_returns_committee_approval(self):
         for rec in self:
             if not rec.custody_state: 
                 raise ValidationError("برجاء اضافة حالة المنتج")
+            
+            if rec.custody_state == 'fixable' and not rec.breakdown_reason:
+                raise ValidationError("الرجاء كتابة سبب العطل ")
             rec.returns_committee_approved =True
         return
 
@@ -55,6 +66,19 @@ class StockPicking(models.Model):
             rec.special_manager_approved =True
         return
 
+    def button_validate(self):
+        for rec in self:
+
+            if rec.picking_type_id.code =="incoming" :
+                if not  rec.requisition_number or not rec.requisition_img :
+                    raise ValidationError("الرجاء  ادخال صورة الطلب و رقم الطلب اولا")
+
+
+            if rec.is_requisition_return  and not rec.inventory_manager_approved:
+                raise ValidationError("لابد من  اتمام الموافقات المطلوبة اولا")
+
+            else :
+                return super(StockPicking, self).button_validate()
 
 
 

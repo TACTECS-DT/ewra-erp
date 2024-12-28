@@ -3,7 +3,7 @@
 from odoo import models, fields, api, _
 from datetime import datetime, date
 from odoo.exceptions import  UserError 
-
+from odoo.exceptions import  ValidationError
 class MaterialPurchaseRequisition(models.Model):
     
     _name = 'material.purchase.requisition'
@@ -41,12 +41,15 @@ class MaterialPurchaseRequisition(models.Model):
         # tracking=True,
         tracking=True
     )
+    state_text = fields.Char(compute='get_current_stat_text',store=False,string='حالة الطلب ')
     request_date = fields.Date(
         string='Requisition Date',
         # default=fields.Date.today(),
         default=lambda self: fields.Date.context_today(self),
         required=True,
     )
+    refuse_reason = fields.Char(string=' سبب الرفض ',store=True)
+
     department_id = fields.Many2one(
         'hr.department',
         string='Department',
@@ -186,7 +189,99 @@ class MaterialPurchaseRequisition(models.Model):
         copy=False,
     )
     custody_return_requested = fields.Boolean(string="تم  طلب ارجاع العهدة",store=True)
-    
+        
+
+
+    @api.onchange('requisition_line_ids')
+    def check_is_custody(self):
+        for rec in self:
+            sustainable_product = rec.requisition_line_ids.filtered(
+                lambda line: line.product_id.product_tmpl_id.custody_state == 'sustainable'
+            )
+
+            # If any sustainable product is found, set is_custody to True
+            rec.is_custody = bool(sustainable_product)
+
+    @api.constrains('requisition_line_ids')
+    def _check_unique_product(self):
+        for record in self:
+            product_ids =  [ i.product_id.id for i in record.requisition_line_ids]
+            if len(product_ids) != len(set(product_ids)):
+                raise ValidationError("You cannot have duplicate products in the requisition lines.")
+            
+
+
+    def action_disbursed(self):
+        
+        stock_obj = self.env['stock.picking']
+
+        for rec in self:
+            # Search for the picking
+            picking = stock_obj.search([
+                ('custom_requisition_id', '=', rec.id),
+                ('location_id', '=', rec.location_id.id),
+                ('location_dest_id', '=', rec.dest_location_id.id)
+            ])
+            if len(picking) > 1:
+                raise ValidationError('There is more than one picking to process.')
+            if not picking:
+                raise ValidationError('No picking found to process.')
+
+            if picking.state not in ['confirmed', 'assigned']:
+                picking.sudo().action_confirm()
+
+            if picking.state not in ['confirmed', 'assigned']:
+                raise ValidationError('The picking could not be confirmed.')
+
+            move_lines = picking.move_ids_without_package
+            requisition_lines = rec.requisition_line_ids
+
+            self.cheack_line_products(requisition_lines)
+
+
+            for requisition_line in requisition_lines:
+                product = requisition_line.product_id
+                qty_to_disburse = requisition_line.qty
+
+                # Find matching stock move
+                matching_move =  [ move  for move in move_lines if   move.product_id == product]
+                print('matching_move',matching_move)
+                print('matching_move',matching_move)
+                if not matching_move or len(matching_move) == 0:
+                    raise ValidationError(
+                         f"No matching stock move found for product {product.display_name} with quantity {qty_to_disburse}."
+                    )
+
+                if len(matching_move) > 1:
+                    raise ValidationError(
+                        f"More than one matching stock move found for product {product.display_name}."
+                    )
+
+                # Update the stock move's quantity
+                for move in matching_move:
+                    if qty_to_disburse <= 0:
+                        raise ValidationError(
+                            f"Invalid quantity {qty_to_disburse} for product {product.display_name}."
+                        )
+                    move.product_uom_qty = qty_to_disburse
+
+            # Validate the picking after all moves are updated
+            # picking.button_validate()
+
+            # Double-check the picking is done after validation
+            # if picking.state != 'done':
+            #     raise ValidationError('The picking could not be validated successfully.')
+
+
+
+
+
+    def cheack_line_products(self,requisition_lines):
+        prs =[i.product_id for i in requisition_lines]
+        if len(prs) != len(set(prs)):
+            raise ValidationError('You cannot have duplicate products in the requisition lines.')
+
+
 
 
     def action_custody_return(self):
@@ -201,6 +296,7 @@ class MaterialPurchaseRequisition(models.Model):
                         'picking_type_id' : rec.custom_picking_type_id.id,
                         'note' : rec.reason,
                         'custom_requisition_id' : rec.id,
+                        'is_requisition_return' : True,
                         'origin' : rec.name,
                         'company_id' : rec.company_id.id,
                     }
@@ -232,12 +328,21 @@ class MaterialPurchaseRequisition(models.Model):
             if manager_mail_template:
                 manager_mail_template.send_mail(self.id)
             
-    #@api.multi
-    def requisition_reject(self):
-        for rec in self:
-            rec.state = 'reject'
-            rec.reject_employee_id = self.env['hr.employee'].search([('user_id', '=', self.env.uid)], limit=1)
-            rec.userreject_date = fields.Date.today()
+    @api.depends('state')
+    @api.onchange('state')
+    def get_current_stat_text(self):
+        for rec in self :
+            state_value = dict(self._fields['state'].selection).get(rec.state)
+            rec.state_text = state_value
+    # #@api.multi
+    # def requisition_reject(self):
+    #     for rec in self:
+    #         if not rec.refuse_reason:
+    #             raise ValidationError("الرجاء كتابة سبب الرفض")
+    #         rec.state = 'reject'
+    #         rec.reject_employee_id = self.env['hr.employee'].search([('user_id', '=', self.env.uid)], limit=1)
+
+    #         rec.userreject_date = fields.Date.today()
 
     #@api.multi
     def manager_approve(self):

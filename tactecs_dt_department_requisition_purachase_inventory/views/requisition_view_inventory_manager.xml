@@ -29,7 +29,11 @@
 
                                invisible="state !='stock'"
                          class="btn-primary"/>
-                        <button name="requisition_reject" type="object" string="Reject" groups="tactecs_dt_department_requisition_purachase_inventory.group_purchase_requisition_department,tactecs_dt_department_requisition_purachase_inventory.group_purchase_requisition_employee"
+ <button name="action_disbursed" type="object" string="Disbursed"
+groups="tactecs_dt_department_requisition_purachase_inventory.group_inventory_disbursed"
+                         class="btn-primary"/>
+
+                        <button  name="%(requisition_reject_wizard_action)d"  type="action" string="Reject" groups="tactecs_dt_department_requisition_purachase_inventory.group_purchase_requisition_department,tactecs_dt_department_requisition_purachase_inventory.group_purchase_requisition_employee"
                         
                            invisible="state not in ['dept_confirm','approve','ir_approve']"
                      />
@@ -44,6 +48,8 @@
                                         statusbar_visible="draft,dept_confirm,ir_approve,approve,stock,receive"/>
                     </header>
                     <sheet>
+                             <widget name="web_ribbon" title="Rejected" bg_color="text-bg-danger" invisible="state !='reject'"/>
+
                     <div class="oe_button_box" name="button_box">
                         <button class="oe_stat_button" type="object" icon="fa-truck"
                                 name="show_picking" string="Internal Picking" groups="stock.group_stock_user"/>
@@ -70,19 +76,26 @@
                                     <field name="request_date" readonly="1" force_save="1"/>
                                     <field name="receive_date" readonly="1" force_save="1" />
                                     <field name="date_end" readonly="state in ['reject','cancel','receive'] "/>
+                                    <field name="state_text" />
+                                 
+                                 
                                     <field name="analytic_account_id" groups="analytic.group_analytic_accounting" readonly="state in ['reject','cancel','receive'] "/>
                                 </group>
                              </group>
                         <notebook>
                             <page string="Requisitions Lines">
                                 <field name="requisition_line_ids"
-                                readonly="state in ['cancel','receive'] "
+                                readonly="state not in ['draft','dept_confirm','ir_approve'] "
                                  >
                                     <list editable="bottom">
                                         <field name="requisition_type" groups="tactecs_dt_department_requisition_purachase_inventory.group_purchase_requisition_manager"/>
                                         <field name="product_id"/>
+                                        <field name="custody_state"/>
+
                                         <field name="description"/>
                                         <field name="qty"/>
+                                        <field name="qty_available"/>
+
                                         <field name="uom"/>
                                         <field name="partner_id" groups="tactecs_dt_department_requisition_purachase_inventory.group_purchase_requisition_manager"
                                                  readonly="requisition_type !='purchase'"
@@ -114,6 +127,8 @@
                                         <field name="employee_confirm_id"/>
                                         <field name="approve_manager_id"/>
                                         <field name="approve_employee_id"/>
+                                        <field name="refuse_reason" force_save='1' readonly='1'/>
+
                                         <field name="reject_employee_id"/>
                                     </group>
                                     <group>

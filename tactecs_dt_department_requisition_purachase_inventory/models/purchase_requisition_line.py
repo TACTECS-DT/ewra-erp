@@ -17,6 +17,17 @@ class MaterialPurchaseRequisitionLine(models.Model):
         string='Product',
         required=True,
     )
+    qty_available = fields.Float(
+        related='product_id.qty_available',
+        string='On Hand',
+        
+    )
+    
+    custody_state = fields.Selection(
+        related='product_id.custody_state',
+        string='حالة الصنف',
+        
+    )
 #     layout_category_id = fields.Many2one(
 #         'sale.layout_category',
 #         string='Section',
