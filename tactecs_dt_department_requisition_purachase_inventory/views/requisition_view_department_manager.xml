@@ -66,6 +66,8 @@
                     </div>
                         <group>
                                 <group>
+                                    <field name="is_custody"  invisible='1' force_save='1' readonly='1' />
+
                                     <field name="employee_id" readonly="1"/>
                                     <field name="department_id" readonly="1"/>
                                     <field name="company_id" groups="base.group_multi_company"        readonly="state !='draft'"/>

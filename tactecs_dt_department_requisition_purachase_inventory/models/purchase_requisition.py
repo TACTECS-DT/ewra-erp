@@ -264,13 +264,14 @@ class MaterialPurchaseRequisition(models.Model):
                             f"Invalid quantity {qty_to_disburse} for product {product.display_name}."
                         )
                     move.product_uom_qty = qty_to_disburse
+                    move.quantity = qty_to_disburse
 
             # Validate the picking after all moves are updated
-            # picking.button_validate()
+            picking.button_validate()
 
             # Double-check the picking is done after validation
-            # if picking.state != 'done':
-            #     raise ValidationError('The picking could not be validated successfully.')
+            if picking.state != 'done':
+                raise ValidationError('The picking could not be validated successfully.')
 
 
 
@@ -374,6 +375,8 @@ class MaterialPurchaseRequisition(models.Model):
         pick_vals = {
             'product_id' : line.product_id.id,
             'product_uom_qty' : line.qty,
+            # 'quantity' : line.qty,
+
             'product_uom' : line.uom.id,
             'location_id' : self.location_id.id,
             'location_dest_id' : self.dest_location_id.id,
@@ -391,6 +394,7 @@ class MaterialPurchaseRequisition(models.Model):
         pick_vals = {
             'product_id' : line.product_id.id,
             'product_uom_qty' : line.qty,
+            # 'quantity' : line.qty,
             'product_uom' : line.uom.id,
             'location_id' : self.dest_location_id.id,
             'location_dest_id' : self.location_id.id,
