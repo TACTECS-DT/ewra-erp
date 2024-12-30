@@ -11,20 +11,32 @@ from odoo.exceptions import UserError, ValidationError
 class InventoryCountSession(models.Model):
     _inherit = 'setu.inventory.count.session'
     
+    
+    
+    def action_view_session_history(self):
+        return {
+            'name': 'History',
+            'view_mode': 'list',
+            'view_id': self.sudo().env.ref('setu_inventory_count_management_18.inventory_session_details_tree_view').id,
+            'res_model': 'inventory.session.details',
+            'type': 'ir.actions.act_window',
+            'domain': [('session_id', '=', self.id)]
+        }
     def create(self, vals_list):
         quants_lines = []
         if 'location_id' in vals_list :
             inventory_count = self.env['setu.stock.inventory.count'].browse(int(vals_list['inventory_count_id']))
+            company = inventory_count.company_id.id
             if inventory_count.scanning_mode == 'products' :
-  
-                quants = self.env["stock.quant"].search([("location_id","=",vals_list["location_id"]),("product_id",'in',inventory_count.allw_product_ids.ids),('company_id','=',inventory_count.company_id.id)])
- 
+                
+                quants = self.env["stock.quant"].search([("location_id","=",vals_list["location_id"]),("product_id",'in',inventory_count.allw_product_ids.ids),('company_id','=',company),('product_id.company_id','in',[company,False])])
+
             if inventory_count.scanning_mode == 'product_categories' :
-                quants = self.env["stock.quant"].search([("location_id","=",vals_list["location_id"]),("product_id.categ_id",'in',inventory_count.product_category_ids.ids),('company_id','=',inventory_count.company_id.id),('product_id.company_id','=',inventory_count.company_id.id)])
+                quants = self.env["stock.quant"].search([("location_id","=",vals_list["location_id"]),("product_id.categ_id",'in',inventory_count.product_category_ids.ids),('company_id','=',company),('product_id.company_id','in',[company,False])])
  
  
             if  inventory_count.scanning_mode in ['internal_ref','lot_serial_no',False]  :
-                quants = self.env["stock.quant"].search([("location_id","=",vals_list["location_id"]),('company_id','=',inventory_count.company_id.id),('product_id.company_id','=',inventory_count.company_id.id)])
+                quants = self.env["stock.quant"].search([("location_id","=",vals_list["location_id"]),('company_id','=',company),('product_id.company_id','in',[company,False])])
  
 
 
@@ -92,32 +104,62 @@ class InventoryCountSession(models.Model):
 
 
             if rec.inventory_count_id.scanning_mode == 'products' :
-                data={}
-                return json.dumps(data, ensure_ascii=False)
+
+                
+                wanted_products = rec.inventory_count_id.allw_product_ids
+                
+                
+                privet_lots = self.env["stock.lot"].search([("location_id","=",rec.
+                location_id.id),("product_id.tracking","=","lot"),('company_id','=',company),("product_id",'in',wanted_products.ids),('product_id.company_id','in',[company,False])])
+
+                all_lots = privet_lots
+                
+                privet_quants = self.env['stock.quant'].search([("location_id","=",rec.location_id.id),('company_id','=',company),("product_id",'in',wanted_products.ids),('product_id.company_id','in',[company,False])])
+                
+                all_products = [i.product_id for i in privet_quants]
+
+
+
+
 
             if rec.inventory_count_id.scanning_mode == 'product_categories' :
-                data={}
-                return json.dumps(data, ensure_ascii=False)
+
+                product_categories = rec.inventory_count_id.product_category_ids
+
+                # all_products = self.env["product.product"].search([("categ_id",'in',product_categories.ids),('company_id','in',[company,False])])
+                
+                privet_lots = self.env["stock.lot"].search([("location_id","=",rec.location_id.id),("product_id.tracking","=","lot"),('company_id','=',company),('product_id.company_id','in',[company,False]),("product_id.categ_id",'in',product_categories.ids)])
+
+                all_lots = privet_lots
+
+                privet_quants = self.env['stock.quant'].search([("location_id","=",rec.location_id.id),('company_id','=',company),("product_id.categ_id",'in',product_categories.ids),('product_id.company_id','in',[company,False])])
+
+
+                all_products = [i.product_id for i in privet_quants]
 
             if rec.inventory_count_id.scanning_mode in ['internal_ref','lot_serial_no',False] :
 
 
+                all_products = self.env["product.product"].search([('company_id','in',[company,False])])
+                
+                all_lots = self.env["stock.lot"].search([("product_id.tracking","=","lot"),('company_id','=',company),('product_id.company_id','in',[company,False])])
 
-                all_products = self.env["product.product"].search([])
-                
-                all_lots = self.env["stock.lot"].search([("product_id.tracking","=","lot"),('company_id','=',company)])
-                
-                privet_lots = self.env["stock.lot"].search([("location_id","=",rec.location_id.id),("product_id.tracking","=","lot"),('company_id','=',company)])
-                if not privet_lots :
+                privet_lots = self.env["stock.lot"].search([("location_id","=",rec.location_id.id),("product_id.tracking","=","lot"),('company_id','=',company),('product_id.company_id','in',[company,False])])
+
+                privet_quants = self.env['stock.quant'].search([("location_id","=",rec.location_id.id),('company_id','=',company),('product_id.company_id','in',[company,False])])
+
+
+
+            if not privet_lots :
                     raise ValidationError("no lots found  in  this location")
                 
-                privet_quants = self.env['stock.quant'].search([("location_id","=",rec.location_id.id),('company_id','=',company)])
-                if not privet_quants :
+
+            if not privet_quants :
                     raise ValidationError("no quants found  in  this location")
                 
 
 
-                all_products_data = [{
+            all_products_data = [{
                     "product_id" :i.id ,
                     "product_name" :i.name ,
                     "tracking" :i.tracking ,
@@ -125,7 +167,7 @@ class InventoryCountSession(models.Model):
                     } for i in all_products]
                 
 
-                privet_products_data = [{
+            privet_products_data = [{
                     "product_id" :i.product_id.id ,
                     "product_name" :i.product_id.name ,
                     "tracking" :i.product_id.tracking ,
@@ -133,25 +175,25 @@ class InventoryCountSession(models.Model):
                     "internal_reference" :i.product_id.default_code ,
                     } for i in privet_quants]
                 
-                privet_products_ids = [i.product_id.id for i in privet_quants]
+            privet_products_ids = [i.product_id.id for i in privet_quants]
                 
 
-                all_lots_data = [{
+            all_lots_data = [{
                     "lot_id" :i.id ,
                     "lot_name" :i.name ,
                     "product" : {"product_id":i.product_id.id,"product_name":i.product_id.name ,"internal_reference" :i.product_id.default_code }    
                     } for i in all_lots]
 
-                privet_lots_data = [{
+            privet_lots_data = [{
                     "lot_id" :i.id ,
                     "lot_name" :i.name ,
                     "product" : {"product_id":i.product_id.id,"product_name":i.product_id.name ,"internal_reference" :i.product_id.default_code}    
                     } for i in privet_lots]
 
-                privet_lots_ids = [i.id  for i in privet_lots]
+            privet_lots_ids = [i.id  for i in privet_lots]
 
 
-                all_internal_reference_data = [{
+            all_internal_reference_data = [{
                     "internal_reference" :i["internal_reference"] ,
                     "product" : {"product_id":i["product_id"],"product_name":i["product_name"]} ,
                 
@@ -160,13 +202,13 @@ class InventoryCountSession(models.Model):
 
 
 
-                privet_internal_reference_data = [{
+            privet_internal_reference_data = [{
                     "internal_reference" :i["internal_reference"] ,
                     "product" : {"product_id":i["product_id"],"product_name":i["product_name"]} ,
                     } for i in privet_products_data if  i["tracking"] =='none']
 
 
-                session_line_ids_Data = [{
+            session_line_ids_Data = [{
                     "line_id" : i.id,
                     "is_all_code" : '0' if i.product_id.id in privet_products_ids or i.lot_id.id in  privet_lots_ids else '1',
                     "line_product" :{"product_id":i.product_id.id,"product_name":i.product_id.name},
@@ -182,11 +224,11 @@ class InventoryCountSession(models.Model):
         
 
 
-                main_location ={
+            main_location ={
                     'location_id':rec.location_id.id,
                     'location_name':rec.location_id.complete_name,
                 }
-                data = {
+            data = {
                     
                     "all_products_data" : all_products_data ,
                     "privet_products_data" : privet_products_data ,
@@ -203,11 +245,19 @@ class InventoryCountSession(models.Model):
                     "main_location" : main_location,
                 }
 
-                print('data: ' ,data)
+            print('#####')
+            print('#####')
+            print('#####')
+            print('#####')
+            print('data: ' ,data)
+            print('#####')
+            print('#####')
+            print('#####')
+            print('#####')
                             
                 
         
-                return json.dumps(data, ensure_ascii=False)
+            return json.dumps(data, ensure_ascii=False)
     
     
     
@@ -249,29 +299,48 @@ class InventoryCountSessionLine(models.Model):
 
     domain_product_id = fields.Char(string="Product Domain", compute="_compute_product_domain")
 
+
+
     @api.depends("session_id")
     def _compute_product_domain(self):
         for line in self:
             if line.session_id and line.session_id.inventory_count_id:
                 count = line.session_id.inventory_count_id
-                if count.scanning_mode == "products":
-                    line.domain_product_id = str([("id", "in", count.allw_product_ids.ids)])
-                elif count.scanning_mode == "product_categories":
-                    line.domain_product_id = str([("categ_id", "in", count.product_category_ids.ids)])
-                else:
+                company = line.session_id.inventory_count_id.company_id
+                location= line.session_id.inventory_count_id.location_id
+
+                if count.scanning_mode  in ["products" , "product_categories"] :
+
+
+                    if count.scanning_mode == "products":
+                        wanted_products= count.allw_product_ids.ids 
+
+            
+                    elif count.scanning_mode == "product_categories":
+                    
+                        wanted_products = self.env["product.product"].search([("categ_id", "in", count.product_category_ids.ids),('company_id','in',[company.id,False])]).ids
+                        
+                    products_that_in_lots = self.env["stock.lot"].search([("location_id","=",location.id),('company_id','=',company.id),("product_id",'in',wanted_products),('product_id.company_id','in',[company.id,False])])
+
+            
+                    
+                    privet_quants = self.env['stock.quant'].search([("location_id","=",location.id),('company_id','=',company.id),("product_id",'in',wanted_products),('product_id.company_id','in',[company.id,False])])
+                        
+                    allwed_products = set([i.product_id.id for i in privet_quants] + [i.product_id.id for i in products_that_in_lots])
+                    
+                    disallwed_products = set([i for i in wanted_products if i not in allwed_products])
+
+                    allwed_products = list(allwed_products)
+                    disallwed_products = list(disallwed_products)
+
+                    line.domain_product_id = str([("id", "in", allwed_products),('company_id','in',[company.id,False])])
+
+                
+                if count.scanning_mode not in ["products" , "product_categories"] :
                     line.domain_product_id = "[]"
+
             else:
                 line.domain_product_id = "[]"
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -295,3 +364,4 @@ class InventoryCountSessionLine(models.Model):
         return super(InventoryCountSessionLine, self).write(vals)
 
 
+ 

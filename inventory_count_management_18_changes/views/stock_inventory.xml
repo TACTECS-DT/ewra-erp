@@ -19,6 +19,13 @@
             </xpath> 
 
 
+            <xpath expr="//button[@name='action_cancel']" position="replace">
+                         <button name="action_cancel" type="object" invisible="state !='confirm'"  string="Cancel" 
+                                confirm="Are you sure to cancel this inventory adjustment?"/>
+                     
+            </xpath> 
+
+
 
 
         </field>
