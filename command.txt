@@ -1,12 +1,17 @@
 1- sudo -s
 2- source /opt/odoo/venv/bin/activate
 3- cd /opt/odoo/odoo/custom_addons
+4- sudo -u odoo rm -rf *
 4- sudo -u odoo git clone https://github.com/TACTECS-DT/ewra-erp.git
 
 5- exit
 
 
+nassar
+
 sudo -s
+test
+
 
 # Start Odoo
 sudo systemctl start odoo
