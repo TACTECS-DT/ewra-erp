@@ -1,3 +1,13 @@
+1- sudo -s
+2- source /opt/odoo/venv/bin/activate
+3- cd /opt/odoo/odoo/custom_addons
+4- sudo -u odoo git clone https://github.com/TACTECS-DT/ewra-erp.git
+
+5- exit
+
+
+sudo -s
+
 # Start Odoo
 sudo systemctl start odoo
 
@@ -9,6 +19,10 @@ sudo systemctl restart odoo
 
 # Check logs
 sudo journalctl -u odoo -f
+
+sudo tail -f /var/log/odoo/odoo18.log
+
+sudo systemctl restart odoo.service
 
 
 python3 odoo/odoo-bin -c odoo/debian/odoo.conf
@@ -26,5 +40,38 @@ sudo chown -R ewra:ewra odoo/custom_addons
 git clone https://github.com/TACTECS-DT/ewra-erp.git odoo/custom_addons
 
 
-Master Password : 4k7m-5knj-drrg
+Master Password :
+gvhx-49hr-4t6z
+YB7jbJBpT4-4fyk
+
+sudo lsof -i :8069
+
+cd /opt/odoo/odoo/custom_addons
+
+git clone https://github.com/TACTECS-DT/ewra-erp.git opt/odoo/odoo/custom_addons
+
+
+pkill -9 -f pid
+
+
+
+update custom_addosn code from git
+
+sudo rm -rf /opt/odoo/odoo/custom_addons
+
+or make backup
+
+sudo mv /opt/odoo/odoo/custom_addons /opt/odoo/odoo/custom_addons_backup
+
+
+sudo chown -R odoo:odoo /opt/odoo/odoo/custom_addons
+sudo chmod -R 755 /opt/odoo/odoo/custom_addons
+xlrd==2.0.1
+openpyxl==3.1.2
+gTTS==2.5.1
+pandas==2.1.2
+SQLAlchemy==2.0.32
+
+
+
 
