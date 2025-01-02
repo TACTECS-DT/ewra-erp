@@ -27,9 +27,12 @@ to scan lot : all wanted products lots even the lot for product that have no qty
 
   
 
-to scan internal references : only internal references for products that have qty in this location  
+to scan internal references : all  internal references for wanted products that have qty in this location   or not have but have tracking by qty
 
-- if user input a product or category that for product witch have no lot or qty in this location  and company .... cannot scan (404 not found) 
+- if user input a product or category that for product witch have no lot or qty in this location :
+
+    if tracking is lot ... caanot scan it 
+    if tracking is qty ..can scan 
 
   
 B- incase  other option : 

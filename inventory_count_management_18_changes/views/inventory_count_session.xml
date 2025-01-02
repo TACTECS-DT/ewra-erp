@@ -98,10 +98,21 @@ required="tracking == 'serial'"  />
                    options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"
                                                    domain="[('product_id', '=', product_id)]"
                                                   
-                                                readonly="parent.use_barcode_scanner or tracking !='lot'"
+                                                readonly="tracking !='lot'"
                                                 required="tracking == 'lot'"
                              
                                                />
+
+            </xpath> 
+
+
+
+
+
+<xpath expr="//field[@name='session_line_ids']//list" position="attributes">
+
+  <attribute name="limit">500</attribute>
+        
 
             </xpath> 
 

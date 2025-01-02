@@ -112,13 +112,13 @@ class InventoryCountSession(models.Model):
                 privet_lots = self.env["stock.lot"].search([("location_id","=",rec.
                 location_id.id),("product_id.tracking","=","lot"),('company_id','=',company),("product_id",'in',wanted_products.ids),('product_id.company_id','in',[company,False])])
 
-                all_lots = privet_lots
-                
+                # to get asked  products that have no qty and have lot out of our  location whatever its location  but its wanted and tracked by lot 
+                all_lots = self.env["stock.lot"].search([("product_id.tracking","=","lot"),('company_id','=',company),("product_id",'in',wanted_products.ids),('product_id.company_id','in',[company,False])])
+
                 privet_quants = self.env['stock.quant'].search([("location_id","=",rec.location_id.id),('company_id','=',company),("product_id",'in',wanted_products.ids),('product_id.company_id','in',[company,False])])
                 
-                all_products = [i.product_id for i in privet_quants]
-
-
+                # to get asked  products that have no qty and no lot but its wanted and tracked by qty 
+                all_products = self.env["product.product"].search([('company_id','in',[company,False]),('tracking','=','none'),("id",'in',wanted_products.ids)])
 
 
 
@@ -126,16 +126,16 @@ class InventoryCountSession(models.Model):
 
                 product_categories = rec.inventory_count_id.product_category_ids
 
-                # all_products = self.env["product.product"].search([("categ_id",'in',product_categories.ids),('company_id','in',[company,False])])
-                
                 privet_lots = self.env["stock.lot"].search([("location_id","=",rec.location_id.id),("product_id.tracking","=","lot"),('company_id','=',company),('product_id.company_id','in',[company,False]),("product_id.categ_id",'in',product_categories.ids)])
 
-                all_lots = privet_lots
+
+                # to get asked  products that have no qty and have lot out of our  location whatever its location  but its wanted and tracked by lot 
+                all_lots = self.env["stock.lot"].search([("product_id.tracking","=","lot"),('company_id','=',company),('product_id.company_id','in',[company,False]),("product_id.categ_id",'in',product_categories.ids)])
 
                 privet_quants = self.env['stock.quant'].search([("location_id","=",rec.location_id.id),('company_id','=',company),("product_id.categ_id",'in',product_categories.ids),('product_id.company_id','in',[company,False])])
 
-
-                all_products = [i.product_id for i in privet_quants]
+                # to get asked  products that have no qty and no lot but its wanted and tracked by qty 
+                all_products = self.env["product.product"].search([('company_id','in',[company,False]),('tracking','=','none'),("categ_id",'in',product_categories.ids)])
 
             if rec.inventory_count_id.scanning_mode in ['internal_ref','lot_serial_no',False] :
 
@@ -150,12 +150,8 @@ class InventoryCountSession(models.Model):
 
 
 
-            if not privet_lots :
-                    raise ValidationError("no lots found  in  this location")
-                
-
-            if not privet_quants :
-                    raise ValidationError("no quants found  in  this location")
+            if not privet_lots  and not all_lots and not  privet_quants:
+                    raise ValidationError("no matched  products  are  found please cheack  location and company and inventory adjustments for wanted products/lots")
                 
 
 
@@ -320,13 +316,18 @@ class InventoryCountSessionLine(models.Model):
                     
                         wanted_products = self.env["product.product"].search([("categ_id", "in", count.product_category_ids.ids),('company_id','in',[company.id,False])]).ids
                         
-                    products_that_in_lots = self.env["stock.lot"].search([("location_id","=",location.id),('company_id','=',company.id),("product_id",'in',wanted_products),('product_id.company_id','in',[company.id,False])])
+                    products_that_in_lots = self.env["stock.lot"].search([('company_id','=',company.id),("product_id",'in',wanted_products),('product_id.company_id','in',[company.id,False])])
 
-            
                     
                     privet_quants = self.env['stock.quant'].search([("location_id","=",location.id),('company_id','=',company.id),("product_id",'in',wanted_products),('product_id.company_id','in',[company.id,False])])
                         
-                    allwed_products = set([i.product_id.id for i in privet_quants] + [i.product_id.id for i in products_that_in_lots])
+                    
+                    all_products = self.env["product.product"].search([('company_id','in',[company.id,False]),('tracking','=','none'),("id",'in',wanted_products)])
+
+
+
+                        
+                    allwed_products = set([i.product_id.id for i in privet_quants] + [i.product_id.id for i in products_that_in_lots] + [i.id for i in all_products ])
                     
                     disallwed_products = set([i for i in wanted_products if i not in allwed_products])
 
